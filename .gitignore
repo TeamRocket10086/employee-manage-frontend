@@ -3,6 +3,7 @@ bazel-*
 test-project-host-*
 dist/
 dist-schema/
+/out-tsc
 
 # IDEs
 jsconfig.json
@@ -44,6 +45,6 @@ yarn-error.log*
 .ng-dev.user*
 .husky/_
 
-# Mac OSX Finder files.
-**/.DS_Store
+# System Files
 .DS_Store
+Thumbs.db
