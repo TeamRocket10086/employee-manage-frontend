@@ -1,5 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { PersonalInfoService } from '../services/personal-info.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
+    /*
   json = {
     "serviceStatus": {
         "statusCode": "SUCCESS",
@@ -72,16 +74,25 @@ export class DashboardComponent implements OnInit {
             "landlord": false
         }
     ]
-};
+};*/
 
-JsonData = JSON.stringify(this.json);
-parsedJson = JSON.parse(this.JsonData);
+//JsonData = JSON.stringify(this.json);
+//parsedJson = JSON.parse(this.JsonData);
+parsedJson : any;
 
-  constructor(private http:HttpClientModule) { }
+  constructor(private http:HttpClientModule, private personalInfo:PersonalInfoService) { }
   
-  ngOnInit() { 
-
-    console.log("With Parsed JSON :" , this.parsedJson);
+  ngOnInit() {
+    this.personalInfo.getAll().subscribe(data => {
+        console.log('Success');
+        //console.log(data);
+        this.parsedJson = data; //JSON.parse(data);
+        console.log("With Parsed JSON :" , this.parsedJson);
+      }, error => {
+        console.log('Failure');
+        console.log(error);
+      });
+    
   }
 
 //   reqData(){ 
