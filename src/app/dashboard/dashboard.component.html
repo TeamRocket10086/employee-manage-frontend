@@ -1,66 +1,194 @@
 <div class="main-content">
   <div class="container-fluid">
-      <div class="row">
-          <div class="col-lg-6 col-md-12">
+    <div class="row">
+        <div class="col-lg-4 col-md-12">
+          <div class="card">
+              <div class="card-header card-header-warning">
+                  <h4 class="card-title">Profile</h4>
+              </div>
+              <div class="card-body">
+                  <div class="tab-content">
+                      <div class="tab-pane active" id="profile">
+                              <table class="table">
+                                  <tbody>
+                                      <tr *ngIf="!editPerson">
+                                        <td><label>Name</label></td>
+                                        <td><div><span>{{myPerson.firstName}} </span>
+                                            <span *ngIf="myPerson.middleName">{{myPerson.middleName}} </span>
+                                            <span>{{myPerson.lastName}}</span></div></td>
+                                      </tr>
+                                      <tr *ngIf="editPerson">
+                                          <td><label>FirstName</label></td>
+                                          <td><input type="text" [(ngModel)]="myPerson.firstName"/></td>
+                                      </tr>
+                                      <tr *ngIf="editPerson">
+                                        <td><label>MiddleName</label></td>
+                                        <td><input type="text" [(ngModel)]="myPerson.middleName"/></td>
+                                    </tr>
+                                      <tr *ngIf="editPerson">
+                                          <td><label>LastName</label></td>
+                                          <td><input type="text" [(ngModel)]="myPerson.lastName"/></td>
+                                      </tr>
+                                    <tr>
+                                        <td><label>Email</label></td>
+                                        <td *ngIf="!editPerson"><p>{{myPerson.email}}</p></td>
+                                        <td *ngIf="editPerson"><input type="email" [(ngModel)]="myPerson.email"/></td>
+                                    </tr>
+                                      <tr>
+                                          <td><label>Gender</label></td>
+                                          <td *ngIf="!editPerson"><p>{{myPerson.gender}}</p></td>
+                                          <td *ngIf="editPerson"><input type="text"[(ngModel)]="myPerson.gender"/></td>
+                                      </tr>
+                                      <tr>
+                                          <td><label>SSN</label></td>
+                                          <td *ngIf="!editPerson"><p>{{myPerson.ssn}}</p></td>
+                                          <td *ngIf="editPerson"><input type="text" [(ngModel)]="myPerson.ssn"/></td>
+                                      </tr>
+                                      <tr>
+                                          <td><label>Cellphone</label></td>
+                                          <td *ngIf="!editPerson"><p>{{myPerson.cellPhone}}</p></td>
+                                          <td *ngIf="editPerson"><input type="text" [(ngModel)]="myPerson.cellPhone"/></td>
+                                      </tr>
+                                      <tr>
+                                          <td><label>Work Phone</label></td>
+                                          <td *ngIf="!editPerson"><p>{{myPerson.alternatePhone}}</p></td>
+                                          <td *ngIf="editPerson"><input type="text" [(ngModel)]="myPerson.alternatePhone"/></td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                              <button *ngIf="!editPerson" mat-raised-button type="button" (click)="showPersonEditor()"
+                              [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                <i class="material-icons">edit</i>
+                              </button>
+                          <button *ngIf="editPerson" (click)="updatePerson()" type="button" class="btn btn-success">Update</button>
+                          <button *ngIf="editPerson" (click)="resetPerson()" type="button" class="btn btn-danger">Cancel</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <!-- next column-->
+        <div class="col-lg-4 col-md-12">
             <div class="card">
                 <div class="card-header card-header-warning">
-                    <h4 class="card-title">Profile</h4>
+                    <h4 class="card-title">Addresses</h4>
                 </div>
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane active" id="profile">
-                            <form #onForm="ngForm">
                                 <table class="table">
+                                    <p>Primary Address</p>
                                     <tbody>
                                         <tr>
-                                            <td><label>Email</label></td>
-                                            <td><input type="text" class="form-control"
-                                                [formControl]='email'
-                                                [(ngModel)]="person.email"/></td>
+                                            <td><label>Line 1</label></td>
+                                            <td *ngIf="!editAddress"><p>{{primary.addressLine1}}</p></td>
+                                            <td *ngIf="editAddress"><input type="text" [(ngModel)]="primary.addressLine1"/></td>
                                         </tr>
                                         <tr>
-                                            <td><label>FirstName</label></td>
-                                            <td><input type="text" class="form-control"
-                                                [formControl]='firstName'
-                                                [(ngModel)]="person.firstName"/></td>
+                                            <td><label>Line 2</label></td>
+                                            <td *ngIf="!editAddress"><p>{{primary.addressLine2}}</p></td>
+                                            <td *ngIf="editAddress"><input type="text" [(ngModel)]="primary.addressLine2"/></td>
                                         </tr>
                                         <tr>
-                                            <td><label>LastName</label></td>
-                                            <td><input type="text" class="form-control"
-                                                [formControl]='lastName'
-                                                [(ngModel)]="person.lastName"/></td>
+                                            <td><label>City</label></td>
+                                            <td *ngIf="!editAddress"><p>{{primary.city}}</p></td>
+                                            <td *ngIf="!editAddress"><label>State</label></td>
+                                            <td *ngIf="!editAddress"><p>{{primary.stateAbbr}}</p></td>
+                                            <td *ngIf="!editAddress"><label>Zipcode</label></td>
+                                            <td *ngIf="!editAddress"><p>{{primary.zipcode}}</p></td>
+                                            <td *ngIf="editAddress"><input type="text" [(ngModel)]="primary.city"/></td>
                                         </tr>
                                         <tr>
-                                            <td><label>Gender</label></td>
-                                            <td><input type="text" class="form-control"
-                                                [formControl]='gender'
-                                                [(ngModel)]="person.gender"/></td>
+                                            <td><label>State</label></td>
+                                            <td *ngIf="editAddress"><input type="text" [(ngModel)]="primary.stateAbbr"/></td>
                                         </tr>
                                         <tr>
-                                            <td><label>SSN</label></td>
-                                            <td><input type="text" class="form-control"
-                                                [formControl]='ssn'
-                                                [(ngModel)]="person.ssn"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>Cellphone</label></td>
-                                            <td><input type="text" class="form-control"
-                                                [formControl]='cellPhone'
-                                                [(ngModel)]="person.cellPhone"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>alternatePhone</label></td>
-                                            <td><input type="text" class="form-control"
-                                                [formControl]='alternatePhone'
-                                                [(ngModel)]="person.alternatePhone"/></td>
+                                            <td><label>Zipcode</label></td>
+                                            <td *ngIf="editAddress"><input type="number" [(ngModel)]="primary.zipcode"/></td>
                                         </tr>
                                     </tbody>
                                 </table>
-                            </form>
-                            <button (click)="updatePerson()" type="button" class="btn btn-success">Update</button>
-                            <button (click)="cancelPerson()" type="button" class="btn btn-danger">Cancel</button>
+                                <table class="table">
+                                    <p>Secondary Address</p>
+                                    <tbody>
+                                        <tr>
+                                            <td><label>Line 1</label></td>
+                                            <td *ngIf="!editAddress"><p>{{secondary.addressLine1}}</p></td>
+                                            <td *ngIf="editAddress"><input type="text" [(ngModel)]="secondary.addressLine1"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label>Line 2</label></td>
+                                            <td *ngIf="!editAddress"><p>{{secondary.addressLine2}}</p></td>
+                                            <td *ngIf="editAddress"><input type="text" [(ngModel)]="secondary.addressLine2"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label>City</label></td>
+                                            <td *ngIf="!editAddress"><p>{{secondary.city}}</p></td>
+                                            <td *ngIf="!editAddress"><label>State</label></td>
+                                            <td *ngIf="!editAddress"><p>{{secondary.stateAbbr}}</p></td>
+                                            <td *ngIf="!editAddress"><label>Zipcode</label></td>
+                                            <td *ngIf="!editAddress"><p>{{secondary.zipcode}}</p></td>
+                                            <td *ngIf="editAddress"><input type="text" [(ngModel)]="secondary.city"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label>State</label></td>
+                                            <td *ngIf="editAddress"><input type="text" [(ngModel)]="secondary.stateAbbr"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label>Zipcode</label></td>
+                                            <td *ngIf="editAddress"><input type="number" [(ngModel)]="secondary.zipcode"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button *ngIf="!editAddress" mat-raised-button type="button" (click)="showAddressEditor()"
+                                [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                  <i class="material-icons">edit</i>
+                                </button>
+                            <button *ngIf="editAddress" (click)="updatePerson()" type="button" class="btn btn-success">Update</button>
+                            <button *ngIf="editAddress" (click)="resetPerson()" type="button" class="btn btn-danger">Cancel</button>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <!-- next column-->
+        <div class="col-lg-4 col-md-12">
+            <div class="card">
+                <div class="card-header card-header-warning">
+                    <h4 class="card-title">Employment</h4>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="profile">
+                                <table class="table">
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                                <button *ngIf="!editEmployment" mat-raised-button type="button" (click)="showEmploymentEditor()"
+                                [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                  <i class="material-icons">edit</i>
+                                </button>
+                            <button *ngIf="editEmployment" (click)="updatePerson()" type="button" class="btn btn-success">Update</button>
+                            <button *ngIf="editEmployment" (click)="resetPerson()" type="button" class="btn btn-danger">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-success card-header-icon">
+                      <p class="card-category">Address</p>
+                      <h3 class="card-title">{{primary.addressLine1}}</h3>
+                      <h3 class="card-title">{{primary.addressLine2}}</h3>
+                  </div>
+                  <div class="card-footer">
+                    <button mat-raised-button type="button" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                        <i class="material-icons">edit</i>
+                    </button>
                 </div>
             </div>
           </div>
