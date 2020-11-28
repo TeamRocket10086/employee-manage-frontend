@@ -13,6 +13,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/dashboard', title: 'Personal Information',  icon: 'dashboard', class: '' },
     { path: '/table-list', title: 'Visa Status Management',  icon:'content_paste', class: '' },
     { path: '/typography', title: 'Housing',  icon:'library_books', class: '' },
+    { path: '/hr-visa', title: 'visa',  icon:'library_books', class: '' }
 ];
 
 @Component({

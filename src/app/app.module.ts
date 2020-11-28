@@ -14,7 +14,6 @@ import {
   AgmCoreModule
 } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { HrVisaComponent } from './hr-visa/hr-visa.component';
 
 @NgModule({
   imports: [
