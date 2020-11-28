@@ -33,6 +33,10 @@ export class Contact {
   beLandlord: boolean;
   beReferrence: boolean;
   beEmergency: boolean;
+
+  constructor(c : Contact) {
+    this.id = c.id;
+  }
 }
 
 export class Address {
