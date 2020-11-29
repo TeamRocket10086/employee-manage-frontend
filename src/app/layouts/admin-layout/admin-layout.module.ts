@@ -13,7 +13,9 @@ import {MatRippleModule} from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
-import { HrVisaComponent } from 'app/hr-visa/hr-visa.component';
+import { HrVisaComponent } from '../../hr-visa/hr-visa.component';
+import { OnboardingComponent } from '../../onboarding/onboarding.component';
+
 
 @NgModule({
   imports: [
@@ -33,7 +35,8 @@ import { HrVisaComponent } from 'app/hr-visa/hr-visa.component';
     HomepageComponent,
     TableListComponent,
     TypographyComponent,
-    HrVisaComponent
+    HrVisaComponent,
+    OnboardingComponent
   ]
 })
 

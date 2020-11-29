@@ -14,6 +14,7 @@ import {
   AgmCoreModule
 } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { OnboardingComponent } from './onboarding/onboarding.component';
 
 @NgModule({
   imports: [
