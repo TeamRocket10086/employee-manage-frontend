@@ -36,6 +36,13 @@ export class Contact {
 
   constructor(c : Contact) {
     this.id = c.id;
+    this.beEmergency = c.beEmergency;
+    this.beLandlord = c.beLandlord;
+    this.beReferrence = c.beReferrence;
+    this.email = c.email;
+    this.name = c.name;
+    this.phone = c.phone;
+    this.relationship = c.relationship;
   }
 }
 
