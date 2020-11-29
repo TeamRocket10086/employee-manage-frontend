@@ -1,232 +1,372 @@
 <div class="main-content">
-  <div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-4 col-md-12">
-          <div class="card">
-              <div class="card-header card-header-warning">
-                  <h4 class="card-title">Profile</h4>
-              </div>
-              <div class="card-body">
-                  <div class="tab-content">
-                      <div class="tab-pane active" id="profile">
-                              <table class="table">
-                                  <tbody>
-                                      <tr *ngIf="!editPerson">
-                                        <td><label>Name</label></td>
-                                        <td><div><span>{{myPerson.firstName}} </span>
-                                            <span *ngIf="myPerson.middleName">{{myPerson.middleName}} </span>
-                                            <span>{{myPerson.lastName}}</span></div></td>
-                                      </tr>
-                                      <tr *ngIf="editPerson">
-                                          <td><label>FirstName</label></td>
-                                          <td><input type="text" [(ngModel)]="myPerson.firstName"/></td>
-                                      </tr>
-                                      <tr *ngIf="editPerson">
-                                        <td><label>MiddleName</label></td>
-                                        <td><input type="text" [(ngModel)]="myPerson.middleName"/></td>
-                                    </tr>
-                                      <tr *ngIf="editPerson">
-                                          <td><label>LastName</label></td>
-                                          <td><input type="text" [(ngModel)]="myPerson.lastName"/></td>
-                                      </tr>                                      
-                                    <tr>
-                                        <td><label>Email</label></td>
-                                        <td *ngIf="!editPerson"><p>{{myPerson.email}}</p></td>
-                                        <td *ngIf="editPerson"><input type="email" [(ngModel)]="myPerson.email"/></td>
-                                    </tr>
-                                      <tr>
-                                          <td><label>Gender</label></td>
-                                          <td *ngIf="!editPerson"><p>{{myPerson.gender}}</p></td>
-                                          <td *ngIf="editPerson"><input type="text"[(ngModel)]="myPerson.gender"/></td>
-                                      </tr>
-                                      <tr>
-                                          <td><label>SSN</label></td>
-                                          <td *ngIf="!editPerson"><p>{{myPerson.ssn}}</p></td>
-                                          <td *ngIf="editPerson"><input type="text" [(ngModel)]="myPerson.ssn"/></td>
-                                      </tr>
-                                      <tr>
-                                          <td><label>Cellphone</label></td>
-                                          <td *ngIf="!editPerson"><p>{{myPerson.cellPhone}}</p></td>
-                                          <td *ngIf="editPerson"><input type="text" [(ngModel)]="myPerson.cellPhone"/></td>
-                                      </tr>
-                                      <tr>
-                                          <td><label>Work Phone</label></td>
-                                          <td *ngIf="!editPerson"><p>{{myPerson.alternatePhone}}</p></td>
-                                          <td *ngIf="editPerson"><input type="text" [(ngModel)]="myPerson.alternatePhone"/></td>
-                                      </tr>
-                                  </tbody>
-                              </table>
-                              <button *ngIf="!editPerson" mat-raised-button type="button" (click)="showPersonEditor()"
-                              [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                                <i class="material-icons">edit</i>
-                              </button>
-                          <button *ngIf="editPerson" (click)="updatePerson()" type="button" class="btn btn-success">Update</button>
-                          <button *ngIf="editPerson" (click)="resetPerson()" type="button" class="btn btn-danger">Cancel</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
-        </div>
-        <!-- next column-->
-        <div class="col-lg-4 col-md-12">
+    <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-4 col-md-12">
             <div class="card">
                 <div class="card-header card-header-warning">
-                    <h4 class="card-title">Addresses</h4>
+                    <h4 class="card-title">Profile</h4>
                 </div>
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane active" id="profile">
                                 <table class="table">
-                                    <p>Primary Address</p>
                                     <tbody>
+                                        <tr *ngIf="!editPerson">
+                                          <td><label>Name</label></td>
+                                          <td><div><span>{{myPerson.firstName}} </span>
+                                              <span *ngIf="myPerson.middleName">{{myPerson.middleName}} </span>
+                                              <span>{{myPerson.lastName}}</span></div></td>
+                                        </tr>
+                                        <tr *ngIf="editPerson">
+                                            <td><label>FirstName</label></td>
+                                            <td><input type="text" [(ngModel)]="myPerson.firstName"/></td>
+                                        </tr>
+                                        <tr *ngIf="editPerson">
+                                          <td><label>MiddleName</label></td>
+                                          <td><input type="text" [(ngModel)]="myPerson.middleName"/></td>
+                                      </tr>
+                                        <tr *ngIf="editPerson">
+                                            <td><label>LastName</label></td>
+                                            <td><input type="text" [(ngModel)]="myPerson.lastName"/></td>
+                                        </tr>                                      
+                                      <tr>
+                                          <td><label>Email</label></td>
+                                          <td *ngIf="!editPerson"><p>{{myPerson.email}}</p></td>
+                                          <td *ngIf="editPerson"><input type="email" [(ngModel)]="myPerson.email"/></td>
+                                      </tr>
                                         <tr>
-                                            <td><label>Line 1</label></td>
-                                            <td *ngIf="!editAddress"><p>{{primary.addressLine1}}</p></td>
-                                            <td *ngIf="editAddress"><input type="text" [(ngModel)]="primary.addressLine1"/></td>
+                                            <td><label>Gender</label></td>
+                                            <td *ngIf="!editPerson"><p>{{myPerson.gender}}</p></td>
+                                            <td *ngIf="editPerson"><input type="text"[(ngModel)]="myPerson.gender"/></td>
                                         </tr>
                                         <tr>
-                                            <td><label>Line 2</label></td>
-                                            <td *ngIf="!editAddress"><p>{{primary.addressLine2}}</p></td>
-                                            <td *ngIf="editAddress"><input type="text" [(ngModel)]="primary.addressLine2"/></td>
+                                            <td><label>SSN</label></td>
+                                            <td *ngIf="!editPerson"><p>{{myPerson.ssn}}</p></td>
+                                            <td *ngIf="editPerson"><input type="text" [(ngModel)]="myPerson.ssn"/></td>
                                         </tr>
                                         <tr>
-                                            <td><label>City</label></td>
-                                            <td *ngIf="!editAddress"><p>{{primary.city}}</p></td>
-                                            <td *ngIf="!editAddress"><label>State</label></td>
-                                            <td *ngIf="!editAddress"><p>{{primary.stateAbbr}}</p></td>
-                                            <td *ngIf="!editAddress"><label>Zipcode</label></td>
-                                            <td *ngIf="!editAddress"><p>{{primary.zipcode}}</p></td>
-                                            <td *ngIf="editAddress"><input type="text" [(ngModel)]="primary.city"/></td>
+                                            <td><label>Cellphone</label></td>
+                                            <td *ngIf="!editPerson"><p>{{myPerson.cellPhone}}</p></td>
+                                            <td *ngIf="editPerson"><input type="text" [(ngModel)]="myPerson.cellPhone"/></td>
                                         </tr>
                                         <tr>
-                                            <td><label>State</label></td>                                            
-                                            <td *ngIf="editAddress"><input type="text" [(ngModel)]="primary.stateAbbr"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>Zipcode</label></td>                                           
-                                            <td *ngIf="editAddress"><input type="number" [(ngModel)]="primary.zipcode"/></td>
+                                            <td><label>Work Phone</label></td>
+                                            <td *ngIf="!editPerson"><p>{{myPerson.alternatePhone}}</p></td>
+                                            <td *ngIf="editPerson"><input type="text" [(ngModel)]="myPerson.alternatePhone"/></td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <table class="table">
-                                    <p>Secondary Address</p>
-                                    <tbody>
-                                        <tr>
-                                            <td><label>Line 1</label></td>
-                                            <td *ngIf="!editAddress"><p>{{secondary.addressLine1}}</p></td>
-                                            <td *ngIf="editAddress"><input type="text" [(ngModel)]="secondary.addressLine1"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>Line 2</label></td>
-                                            <td *ngIf="!editAddress"><p>{{secondary.addressLine2}}</p></td>
-                                            <td *ngIf="editAddress"><input type="text" [(ngModel)]="secondary.addressLine2"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>City</label></td>
-                                            <td *ngIf="!editAddress"><p>{{secondary.city}}</p></td>
-                                            <td *ngIf="!editAddress"><label>State</label></td>
-                                            <td *ngIf="!editAddress"><p>{{secondary.stateAbbr}}</p></td>
-                                            <td *ngIf="!editAddress"><label>Zipcode</label></td>
-                                            <td *ngIf="!editAddress"><p>{{secondary.zipcode}}</p></td>
-                                            <td *ngIf="editAddress"><input type="text" [(ngModel)]="secondary.city"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>State</label></td>                                            
-                                            <td *ngIf="editAddress"><input type="text" [(ngModel)]="secondary.stateAbbr"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>Zipcode</label></td>                                           
-                                            <td *ngIf="editAddress"><input type="number" [(ngModel)]="secondary.zipcode"/></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <button *ngIf="!editAddress" mat-raised-button type="button" (click)="showAddressEditor()"
+                                <button *ngIf="!editPerson" mat-raised-button type="button" (click)="showPersonEditor()"
                                 [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
                                   <i class="material-icons">edit</i>
                                 </button>
-                            <button *ngIf="editAddress" (click)="updatePerson()" type="button" class="btn btn-success">Update</button>
-                            <button *ngIf="editAddress" (click)="resetPerson()" type="button" class="btn btn-danger">Cancel</button>
+                            <button *ngIf="editPerson" (click)="updatePerson()" type="button" class="btn btn-success">Update</button>
+                            <button *ngIf="editPerson" (click)="resetPerson()" type="button" class="btn btn-danger">Cancel</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- next column-->
-        <div class="col-lg-4 col-md-12">
-            <div class="card">
-                <div class="card-header card-header-warning">
-                    <h4 class="card-title">Employment</h4>
+          </div>
+          <!-- next column-->
+          <div class="col-lg-4 col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-warning">
+                      <h4 class="card-title">Addresses</h4>
+                  </div>
+                  <div class="card-body">
+                      <div class="tab-content">
+                          <div class="tab-pane active" id="profile">
+                                  <table class="table">
+                                      <p>Primary Address</p>
+                                      <tbody>
+                                          <tr>
+                                              <td><label>Line 1</label></td>
+                                              <td *ngIf="!editAddress"><p>{{primary.addressLine1}}</p></td>
+                                              <td *ngIf="editAddress"><input type="text" [(ngModel)]="primary.addressLine1"/></td>
+                                          </tr>
+                                          <tr>
+                                              <td><label>Line 2</label></td>
+                                              <td *ngIf="!editAddress"><p>{{primary.addressLine2}}</p></td>
+                                              <td *ngIf="editAddress"><input type="text" [(ngModel)]="primary.addressLine2"/></td>
+                                          </tr>
+                                          <tr>
+                                              <td><label>City</label></td>
+                                              <td *ngIf="!editAddress"><p>{{primary.city}}</p></td>
+                                              <td *ngIf="!editAddress"><label>State</label></td>
+                                              <td *ngIf="!editAddress"><p>{{primary.stateAbbr}}</p></td>
+                                              <td *ngIf="!editAddress"><label>Zipcode</label></td>
+                                              <td *ngIf="!editAddress"><p>{{primary.zipcode}}</p></td>
+                                              <td *ngIf="editAddress"><input type="text" [(ngModel)]="primary.city"/></td>
+                                          </tr>
+                                          <tr *ngIf="editAddress">
+                                              <td><label>State</label></td>                                            
+                                              <td><input type="text" [(ngModel)]="primary.stateAbbr"/></td>
+                                          </tr>
+                                          <tr *ngIf="editAddress">
+                                              <td><label>Zipcode</label></td>                                           
+                                              <td><input type="number" [(ngModel)]="primary.zipcode"/></td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                                  <table class="table">
+                                      <p>Secondary Address</p>
+                                      <tbody>
+                                          <tr>
+                                              <td><label>Line 1</label></td>
+                                              <td *ngIf="!editAddress"><p>{{secondary.addressLine1}}</p></td>
+                                              <td *ngIf="editAddress"><input type="text" [(ngModel)]="secondary.addressLine1"/></td>
+                                          </tr>
+                                          <tr>
+                                              <td><label>Line 2</label></td>
+                                              <td *ngIf="!editAddress"><p>{{secondary.addressLine2}}</p></td>
+                                              <td *ngIf="editAddress"><input type="text" [(ngModel)]="secondary.addressLine2"/></td>
+                                          </tr>
+                                          <tr>
+                                              <td><label>City</label></td>
+                                              <td *ngIf="!editAddress"><p>{{secondary.city}}</p></td>
+                                              <td *ngIf="!editAddress"><label>State</label></td>
+                                              <td *ngIf="!editAddress"><p>{{secondary.stateAbbr}}</p></td>
+                                              <td *ngIf="!editAddress"><label>Zipcode</label></td>
+                                              <td *ngIf="!editAddress"><p>{{secondary.zipcode}}</p></td>
+                                              <td *ngIf="editAddress"><input type="text" [(ngModel)]="secondary.city"/></td>
+                                          </tr>
+                                          <tr *ngIf="editAddress">
+                                              <td><label>State</label></td>                                            
+                                              <td><input type="text" [(ngModel)]="secondary.stateAbbr"/></td>
+                                          </tr>
+                                          <tr *ngIf="editAddress">
+                                              <td><label>Zipcode</label></td>                                           
+                                              <td><input type="number" [(ngModel)]="secondary.zipcode"/></td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                                  <button *ngIf="!editAddress" mat-raised-button type="button" (click)="showAddressEditor()"
+                                  [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                    <i class="material-icons">edit</i>
+                                  </button>
+                              <button *ngIf="editAddress" (click)="updateAddresses()" type="button" class="btn btn-success">Update</button>
+                              <button *ngIf="editAddress" (click)="resetAddresses()" type="button" class="btn btn-danger">Cancel</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- next column-->
+          <div class="col-lg-4 col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-warning">
+                      <h4 class="card-title">Employment</h4>
+                  </div>
+                  <div class="card-body">
+                      <div class="tab-content">
+                          <div class="tab-pane active" id="profile">
+                                  <table class="table">
+                                      <tbody>
+  
+                                      </tbody>
+                                  </table>
+                                  <button *ngIf="!editEmployment" mat-raised-button type="button" (click)="showEmploymentEditor()"
+                                  [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                    <i class="material-icons">edit</i>
+                                  </button>
+                              <button *ngIf="editEmployment" (click)="updatePerson()" type="button" class="btn btn-success">Update</button>
+                              <button *ngIf="editEmployment" (click)="resetPerson()" type="button" class="btn btn-danger">Cancel</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-success card-header-icon">
+                        <p class="card-category">Address</p>
+                        <h3 class="card-title">{{primary.addressLine1}}</h3>
+                        <h3 class="card-title">{{primary.addressLine2}}</h3>
+                    </div>
+                    <div class="card-footer">
+                      <button mat-raised-button type="button" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                          <i class="material-icons">edit</i>
+                      </button>
+                  </div>
                 </div>
-                <div class="card-body">
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="profile">
-                                <table class="table">
-                                    <tbody>
-
-                                    </tbody>
-                                </table>
-                                <button *ngIf="!editEmployment" mat-raised-button type="button" (click)="showEmploymentEditor()"
-                                [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                                  <i class="material-icons">edit</i>
-                                </button>
-                            <button *ngIf="editEmployment" (click)="updatePerson()" type="button" class="btn btn-success">Update</button>
-                            <button *ngIf="editEmployment" (click)="resetPerson()" type="button" class="btn btn-danger">Cancel</button>
-                        </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <p class="card-category">Contact</p>
+                        <h3 class="card-title"><small>Personal Email<br></small>{{parsedJson.person.email}}</h3>
+                        <h3 class="card-title"><small>Work Email<br></small>{{parsedJson.person.email}}</h3>
+                        <h3 class="card-title"><small>Cellphone<br></small>{{parsedJson.person.cellPhone}}</h3>
+                        <h3 class="card-title"><small>Work phone<br></small>{{parsedJson.person.alternatePhone}}</h3>
+                    </div>
+                    <div class="card-footer">
+                      <button mat-raised-button type="button" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                          <i class="material-icons">edit</i>
+                      </button>
+                  </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-info card-header-icon">
+                        <p class="card-category">Employment</p>
+                        <h3 class="card-title"><small>Work Authorization<br></small> OPT</h3>
+                        <h3 class="card-title"><small>Start Date and end date<br></small> 01/01/1990 - 01/01/1995</h3>
+                        <h3 class="card-title"><small>Employment Start Date and end date<br></small> 01/01/1990 - 01/01/1995</h3>
+                        <h3 class="card-title"><small>Work Authorization<br></small> OPT</h3>
+                        <h3 class="card-title"><small>Title<br></small> OPT</h3>
+                    </div>
+                    <div class="card-footer">
+                      <button mat-raised-button type="button" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                          <i class="material-icons">edit</i>
+                      </button>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-warning">
+                      <h4 class="card-title">Emergency Contact</h4>
+                  </div>
+                  <div class="card-body table-responsive">
+                      <table class="table table-hover">
+                          <thead class="text-warning">
+                              <th>Name</th>
+                              <th>Phone</th>
+                              <th>Address</th>
+                              <th>operation</th>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>Dakota Rice</td>
+                                  <td>2018850001</td>
+                                  <td>1000 Clinton St.&nbsp;&nbsp;Hoboken&nbsp;&nbsp;NJ</td>
+                                  <td class="td-actions text-right">
+                                      <button mat-raised-button type="button" matTooltip="Edit" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                          <i class="material-icons">edit</i>
+                                      </button>
+                                      <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                          <i class="material-icons">close</i>
+                                      </button>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>Minerva Hooper</td>
+                                  <td>2018850001</td>
+                                  <td>1000 Clinton St.&nbsp;&nbsp;Hoboken&nbsp;&nbsp;NJ</td>
+                                  <td class="td-actions text-right">
+                                      <button mat-raised-button type="button" matTooltip="Edit" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                          <i class="material-icons">edit</i>
+                                      </button>
+                                      <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                          <i class="material-icons">close</i>
+                                      </button>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>Sage Rodriguez</td>
+                                  <td>2018850001</td>
+                                  <td>1000 Clinton St.&nbsp;&nbsp;Hoboken&nbsp;&nbsp;NJ</td>
+                                  <td class="td-actions text-right">
+                                      <button mat-raised-button type="button" matTooltip="Edit" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                          <i class="material-icons">edit</i>
+                                      </button>
+                                      <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                          <i class="material-icons">close</i>
+                                      </button>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>Philip Chaney</td>
+                                  <td>2018850001</td>
+                                  <td>1000 Clinton St.&nbsp;&nbsp;Hoboken&nbsp;&nbsp;NJ</td>
+                                  <td class="td-actions text-right">
+                                      <button mat-raised-button type="button" matTooltip="Edit" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                          <i class="material-icons">edit</i>
+                                      </button>
+                                      <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                          <i class="material-icons">close</i>
+                                      </button>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-warning">
+                        <h4 class="card-title">Documents</h4>
+                    </div>
+                    <div class="card-body table-responsive">
+                        <table class="table table-hover">
+                            <thead class="text-warning">
+                                <th>Create date</th>
+                                <th>Document name</th>
+                                <th>Preview</th>
+                                <th>Download</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>01/01/2020</td>
+                                    <td>opt.txt</td>
+                                    <td>
+                                        <a href="">preview</a>
+                                    </td>
+                                    <td>
+                                        <a href="">Download</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>01/01/2020</td>
+                                    <td>opt.txt</td>
+                                    <td>
+                                      <a href="">preview</a>
+                                    </td>
+                                    <td>
+                                      <a href="">Download</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>01/01/2020</td>
+                                    <td>opt.txt</td>
+                                    <td>
+                                      <a href="">preview</a>
+                                    </td>
+                                    <td>
+                                      <a href="">Download</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>01/01/2020</td>
+                                    <td>opt.txt</td>
+                                    <td>
+                                      <a href="">preview</a>
+                                    </td>
+                                    <td>
+                                      <a href="">Download</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-      <div class="row">
-          <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                  <div class="card-header card-header-success card-header-icon">
-                      <p class="card-category">Address</p>
-                      <h3 class="card-title">{{primary.addressLine1}}</h3>
-                      <h3 class="card-title">{{primary.addressLine2}}</h3>
-                  </div>
-                  <div class="card-footer">
-                    <button mat-raised-button type="button" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                        <i class="material-icons">edit</i>
-                    </button>
-                </div>
-              </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                  <div class="card-header card-header-danger card-header-icon">
-                      <p class="card-category">Contact</p>
-                      <h3 class="card-title"><small>Personal Email<br></small>{{parsedJson.person.email}}</h3>
-                      <h3 class="card-title"><small>Work Email<br></small>{{parsedJson.person.email}}</h3>
-                      <h3 class="card-title"><small>Cellphone<br></small>{{parsedJson.person.cellPhone}}</h3>
-                      <h3 class="card-title"><small>Work phone<br></small>{{parsedJson.person.alternatePhone}}</h3>
-                  </div>
-                  <div class="card-footer">
-                    <button mat-raised-button type="button" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                        <i class="material-icons">edit</i>
-                    </button>
-                </div>
-              </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                  <div class="card-header card-header-info card-header-icon">
-                      <p class="card-category">Employment</p>
-                      <h3 class="card-title"><small>Work Authorization<br></small> OPT</h3>
-                      <h3 class="card-title"><small>Start Date and end date<br></small> 01/01/1990 - 01/01/1995</h3>
-                      <h3 class="card-title"><small>Employment Start Date and end date<br></small> 01/01/1990 - 01/01/1995</h3>
-                      <h3 class="card-title"><small>Work Authorization<br></small> OPT</h3>
-                      <h3 class="card-title"><small>Title<br></small> OPT</h3>
-                  </div>
-                  <div class="card-footer">
-                    <button mat-raised-button type="button" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                        <i class="material-icons">edit</i>
-                    </button>
-                </div>
-              </div>
-          </div>
-      </div>
-      <div class="row">
+  </div>
+
+
+
+<div class="main-content">
+  <div class="container-fluid">
+    
+    <div class="row">
           <div class="col-lg-6 col-md-12">
             <div class="card">
                 <div class="card-header card-header-warning">
@@ -298,11 +438,12 @@
                 </div>
             </div>
         </div>
-          <div class="col-lg-6 col-md-12">
+        <div class="col-lg-6 col-md-12">
               <div class="card">
                   <div class="card-header card-header-warning">
                       <h4 class="card-title">Documents</h4>
                   </div>
+
                   <div class="card-body table-responsive">
                       <table class="table table-hover">
                           <thead class="text-warning">
@@ -313,10 +454,16 @@
                           </thead>
                           <tbody>
                               <tr>
+                                  <td>
+                                      <input (change)="selectFile($event)" [formControl]='opt' type="file">
+                                      <button (click)="upload()" class="btn btn-light">Upload</button>
+                                  </td>
+                              </tr>
+                              <tr>
                                   <td>01/01/2020</td>
                                   <td>opt.txt</td>
                                   <td>
-                                      <a href="">preview</a>
+                                      <a href="" >preview</a>
                                   </td>
                                   <td>
                                       <a href="">Download</a>

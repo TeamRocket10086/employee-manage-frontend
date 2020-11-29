@@ -1,7 +1,11 @@
-import { HttpClientModule } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpClientModule, HttpEventType, HttpResponse } from '@angular/common/http';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+//import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PersonalInfoService } from '../services/personal-info.service';
 import { Person, Employee, Contact, Address, VisaStatus } from './modules/dto';
+import { FileServiceService } from '../services/file-service.service';
+
+declare const $: any;
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +15,7 @@ import { Person, Employee, Contact, Address, VisaStatus } from './modules/dto';
 export class DashboardComponent implements OnInit {
 
     /*
-  json = {
+  /*json = {
     "serviceStatus": {
         "statusCode": "SUCCESS",
         "success": true,
@@ -82,6 +86,7 @@ export class DashboardComponent implements OnInit {
         }
     ]
 };*/
+  constructor(private http: HttpClient, private personalInfo: PersonalInfoService, private fileService: FileServiceService) { }
 
 parsedJson : any; // save the perminant values
 myPerson : Person; // show and reset data for users
@@ -93,8 +98,9 @@ visa : VisaStatus;
 editPerson : boolean = false;
 editAddress : boolean = false;
 editEmployment : boolean = false;
+editContacts : boolean = false;
+//opt: FormControl;
 
-  constructor(private http:HttpClientModule, private personalInfo:PersonalInfoService) { }
   
   ngOnInit() {
     this.personalInfo.getPersonalInfo().subscribe(data => {
@@ -110,26 +116,67 @@ editEmployment : boolean = false;
       }, error => {
         console.log('Failure');
         console.log(error);
-      });
-    
+      });    
   }
-
+  
   updatePerson() {
     this.personalInfo.updatePerson(this.myPerson).subscribe (
       data=>{
-          console.log('update!');
+          console.log('update person!');
           // Update perminate data, too
           this.parsedJson.person = this.myPerson;
       }
     );
     this.editPerson = false;
   }
+
+  updateAddresses() {
+    this.personalInfo.updateAddress(this.primary).subscribe (
+      data=>{
+          console.log('update primary!');
+          // Update perminate data, too
+          this.parsedJson.primary = this.primary;
+      }
+    );
+    this.personalInfo.updateAddress(this.secondary).subscribe (
+      data=>{
+          console.log('update secondary!');
+          // Update perminate data, too
+          this.parsedJson.secondary = this.secondary;
+      }
+    );
+    this.editAddress = false;
+  }
+
+  updateContacts() {
+    this.personalInfo.updateContact(this.contacts).subscribe (
+      data=>{
+          console.log('updating contacts!');
+      }
+    );
+    console.log('updated contacts!');
+    // Update perminate data, too
+    this.parsedJson.contacts = this.contacts;
+    this.editContacts = false;
+  }
   
   resetPerson() {
-    this.editPerson = false;
     this.myPerson = new Person(this.parsedJson.person);
-    console.log(this.parsedJson.person);
-    //this.myPerson.alternatePhone = "test";
+    //console.log(this.parsedJson.person);
+    //this.myPerson.alternatePhone = "test";    
+    this.editPerson = false;
+  }
+
+  resetAddresses() {
+    this.primary = new Address(this.parsedJson.primary);
+    this.secondary = new Address(this.parsedJson.secondary);
+    console.log(this.parsedJson.primary);
+    this.editAddress = false;
+  }
+
+  resetContacts() {
+    //TODO
+    this.editContacts = false;
   }
 
   showPersonEditor() {
@@ -143,5 +190,30 @@ editEmployment : boolean = false;
   showEmploymentEditor() {
     this.editEmployment = true;
   }
+
+  showContactsEditor() {    
+    this.editContacts = true;
+  }
   
+
+
+  // 上传文件
+  selectedFiles: FileList;
+  currentFileUpload: File;
+
+  selectFile(event) {
+    this.selectedFiles = event.target.files;
+  }
+
+  upload() {
+    this.currentFileUpload = this.selectedFiles.item(0);
+    this.fileService.pushFileToStorage(this.currentFileUpload).subscribe(event => {
+      if (event.type === HttpEventType.UploadProgress) {
+        console.log('wait...');
+      } else if (event instanceof HttpResponse) {
+        console.log('uploaded...');
+      }
+      // this.selectedFiles = undefined;
+    }); 
+  }
 }

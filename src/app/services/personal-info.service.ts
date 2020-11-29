@@ -22,6 +22,14 @@ export class PersonalInfoService {
     return this.http.put(this.url + "/personalinfo/person", person);
   }
 
+  updateAddress(addr : Address): Observable<any> {
+    return this.http.put(this.url + "/personalinfo/address", addr);
+  }
+
+  updateContact(cons : Contact []): Observable<any> {
+    return this.http.put(this.url + "/personalinfo/contact", cons);
+  }
+
   public sendGETRequestWithParameters(PageNo: number, SortOn: number){
     const opts = { params: new HttpParams({fromString: "page=1&limit=10"}) };
     //const params = new HttpParams()
