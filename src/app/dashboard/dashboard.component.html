@@ -68,7 +68,7 @@
             </div>
           </div>
           <!-- next column-->
-          <div class="col-lg-4 col-md-12">
+          <div class="col-lg-5 col-md-12">
               <div class="card">
                   <div class="card-header card-header-warning">
                       <h4 class="card-title">Addresses</h4>
@@ -152,7 +152,7 @@
               </div>
           </div>
           <!-- next column-->
-          <div class="col-lg-4 col-md-12">
+          <div class="col-lg-3 col-md-12">
               <div class="card">
                   <div class="card-header card-header-warning">
                       <h4 class="card-title">Employment</h4>
@@ -162,39 +162,61 @@
                           <div class="tab-pane active" id="profile">
                                   <table class="table">
                                       <tbody>
-  
+                                        <tr>
+                                            <td><label>Work Authorization</label></td>
+                                        </tr>
+                                        <tr>
+                                            <td *ngIf="!editEmployment"><p>{{employee.visaTitle}}</p></td>
+                                            <td *ngIf="editEmployment"><input type="text" [(ngModel)]="employee.visaTitle"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label>Authrization Start Date</label></td>
+                                        </tr>
+                                        <tr>
+                                            <td *ngIf="!editEmployment"><p>{{employee.visaStartDate}}</p></td>
+                                            <td *ngIf="editEmployment"><input type="date" [(ngModel)]="employee.visaStartDate"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label>Authrization End Date</label></td>
+                                        </tr>
+                                        <tr>
+                                            <td *ngIf="!editEmployment"><p>{{employee.visaEndDate}}</p></td>
+                                            <td *ngIf="editEmployment"><input type="date" [(ngModel)]="employee.visaEndDate"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label>Work Title</label></td>
+                                        </tr>
+                                        <tr>
+                                            <td *ngIf="!editEmployment"><p>{{employee.title}}</p></td>
+                                            <td *ngIf="editEmployment"><input type="text" [(ngModel)]="employee.title"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label>Employment Start Date</label></td>
+                                        </tr>
+                                        <tr>
+                                            <td *ngIf="!editEmployment"><p>{{employee.startDate}}</p></td>
+                                            <td *ngIf="editEmployment"><input type="date" [(ngModel)]="employee.startDate"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label>Employment End Date</label></td>
+                                        </tr>
+                                        <tr>
+                                            <td *ngIf="!editEmployment"><p>{{employee.endDate}}</p></td>
+                                            <td *ngIf="editEmployment"><input type="date" [(ngModel)]="employee.endDate"/></td>
+                                        </tr>
                                       </tbody>
                                   </table>
                                   <button *ngIf="!editEmployment" mat-raised-button type="button" (click)="showEmploymentEditor()"
                                   [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
                                     <i class="material-icons">edit</i>
                                   </button>
-                              <button *ngIf="editEmployment" (click)="updatePerson()" type="button" class="btn btn-success">Update</button>
-                              <button *ngIf="editEmployment" (click)="resetPerson()" type="button" class="btn btn-danger">Cancel</button>
+                              <button *ngIf="editEmployment" (click)="updateEmployment()" type="button" class="btn btn-success">Update</button>
+                              <button *ngIf="editEmployment" (click)="resetEmployment()" type="button" class="btn btn-danger">Cancel</button>
                           </div>
                       </div>
                   </div>
               </div>
           </div>
-        </div>
-        <div class="row">            
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-header card-header-info card-header-icon">
-                        <p class="card-category">Employment</p>
-                        <h3 class="card-title"><small>Work Authorization<br></small> OPT</h3>
-                        <h3 class="card-title"><small>Authrization start Date and end date<br></small> 01/01/1990 - 01/01/1995</h3>
-                        <h3 class="card-title"><small>Employment Start Date<br></small> 01/01/1990 - 01/01/1995</h3>
-                        <h3 class="card-title"><small>Employment End Date<br></small> OPT</h3>
-                        <h3 class="card-title"><small>Title<br></small> OPT</h3>
-                    </div>
-                    <div class="card-footer">
-                      <button mat-raised-button type="button" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                          <i class="material-icons">edit</i>
-                      </button>
-                  </div>
-                </div>
-            </div>
         </div>
         <div class="row">
             <div class="col-lg-6 col-md-12">

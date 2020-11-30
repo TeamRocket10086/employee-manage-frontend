@@ -30,9 +30,9 @@ export class Contact {
   name: string;
   email: string;
   phone: string;
-  beLandlord: boolean;
-  beReferrence: boolean;
-  beEmergency: boolean;
+  beLandlord: Boolean;
+  beReferrence: Boolean;
+  beEmergency: Boolean;
 
   constructor(c : Contact) {
     this.id = c.id;
@@ -54,22 +54,61 @@ export class Address {
   stateName: string;
   stateAbbr: string;
   id: number = 0;
-  primary: boolean;
+  bePrimary: boolean;
 
   constructor(addr: Address){
     this.addressLine1 = addr.addressLine1;
     this.addressLine2 = addr.addressLine2;
     this.city = addr.city;
     this.id = addr.id;
-    this.primary = addr.primary;
+    this.bePrimary = addr.bePrimary;
     this.stateAbbr = addr.stateAbbr;
     this.stateName = addr.stateName;
     this.zipcode = addr.zipcode;
   }
 }
 
+/*
+"employee": {
+        "title": "Backend Engineer",
+        "startDate": "2019-11-28",
+        "endDate": "2020-11-28",
+        "avatar": "",
+        "car": "Camry",
+        "visaStartDate": "2020-3-1",
+        "visaEndDate": "2021-3-1",
+        "driverLicense": "Er56828923",
+        "driverLicenseExpirationDate": "2021-03-01",
+        "eid": 1,
+        "visaTitle": "F1/OPT"
+    }
+*/
 export class Employee {
+  eid: number = 0;
+  title: string;
+  startDate: string;
+  endDate: string;
+  avatar: string;
+  car: string;
+  visaStartDate: string;
+  visaEndDate: string;
+  driverLicense: string;
+  driverLicenseExpirationDate: string;
+  visaTitle: string;
 
+  constructor(emp: Employee){
+    this.eid = emp.eid;
+    this.title = emp.title;
+    this.startDate = emp.startDate;
+    this.endDate = emp.endDate;
+    this.avatar = emp.avatar;
+    this.car = emp.car;
+    this.visaStartDate = emp.visaStartDate;
+    this.visaEndDate = emp.visaEndDate;
+    this.driverLicense = emp.driverLicense;
+    this.driverLicenseExpirationDate = emp.driverLicenseExpirationDate;
+    this.visaTitle = emp.visaTitle;
+  }
 }
 
 export class VisaStatus {

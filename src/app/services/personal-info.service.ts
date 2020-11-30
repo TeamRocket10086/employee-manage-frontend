@@ -18,12 +18,16 @@ export class PersonalInfoService {
   }
 
   updatePerson(person : Person): Observable<any> {
-    //Angular 默认Content-Type 就是application/json 因此不必要加入请求头Content-Type:application/json
+    //Angular默认, 不必要加入请求头Content-Type:application/json
     return this.http.put(this.url + "/personalinfo/person", person);
   }
 
   updateAddress(addr : Address): Observable<any> {
     return this.http.put(this.url + "/personalinfo/address", addr);
+  }
+
+  updateEmployee(emp : Employee): Observable<any> {
+    return this.http.put(this.url + "/personalinfo/employee", emp);
   }
 
   updateContact(cons : Contact []): Observable<any> {

@@ -14,78 +14,6 @@ declare const $: any;
 })
 export class DashboardComponent implements OnInit {
 
-    /*
-  /*json = {
-    "serviceStatus": {
-        "statusCode": "SUCCESS",
-        "success": true,
-        "errorMessage": ""
-    },
-    "person": {
-        "firstName": "Tom",
-        "lastName": "Cruise",
-        "middleName": "",
-        "email": "test@123.com",
-        "cellPhone": "3214565678",
-        "alternatePhone": null,
-        "gender": "Male",
-        "ssn": "xxxxx6897",
-        "dob": "1980-02-03",
-        "age": 40
-    },
-    "primary": {
-        "addressLine1": "Test2",
-        "addressLine2": "",
-        "city": "Oakland",
-        "zipcode": "34567",
-        "stateName": "Michigan",
-        "stateAbbr": "MI",
-        "id": 3,
-        "primary": true
-    },
-    "secondary": {
-        "addressLine1": "Test1",
-        "addressLine2": "test1",
-        "city": "New York",
-        "zipcode": "53452",
-        "stateName": "New York",
-        "stateAbbr": "NY",
-        "id": 2,
-        "primary": false
-    },
-    "referee": {
-        "relationship": "Friend",
-        "name": "Contact1",
-        "email": "test1@123.com",
-        "phone": "3134567890",
-        "id": 1,
-        "landlord": false,
-        "referrence": true,
-        "emergency": false
-    },
-    "emergencies": [
-        {
-            "relationship": "Friend",
-            "name": "Contact2",
-            "email": "test1@123.com",
-            "phone": "3134567123",
-            "id": 4,
-            "landlord": false,
-            "referrence": false,
-            "emergency": true
-        },
-        {
-            "relationship": "Relative",
-            "name": "Contact3",
-            "email": "tet3@123.com",
-            "phone": "1233132345",
-            "id": 5,
-            "landlord": false,
-            "referrence": false,
-            "emergency": true
-        }
-    ]
-};*/
   constructor(private http: HttpClient, private personalInfo: PersonalInfoService, private fileService: FileServiceService) { }
 
 parsedJson : any; // save the perminant values
@@ -109,10 +37,18 @@ editContacts : boolean = false;
         this.parsedJson = data; //JSON.parse(data);
         console.log("With Parsed JSON :" , this.parsedJson.person);
         this.myPerson = new Person(this.parsedJson.person);
-        this.primary = data.primary;
-        this.secondary = data.secondary;
-        this.contacts = data.emergencies;
-        this.employee = data.employee;
+        this.primary = new Address(this.parsedJson.primary);
+        this.secondary = new Address(this.parsedJson.secondary);
+
+        // Add emergency contacts
+        this.contacts = this.parsedJson.emergencies;
+        let len = this.parsedJson.emergencies.length;
+        for (let i = 0; i < len; i++) {
+          this.contacts[i] = new Contact(this.parsedJson.emergencies[i]);
+          //console.log("Contact " + this.contacts[i].name);
+        }
+
+        this.employee = new Employee(data.employee);
       }, error => {
         console.log('Failure');
         console.log(error);
@@ -122,27 +58,38 @@ editContacts : boolean = false;
   updatePerson() {
     this.personalInfo.updatePerson(this.myPerson).subscribe (
       data=>{
-          console.log('update person!');
+          console.log('updated person!');
           // Update perminate data, too
-          this.parsedJson.person = this.myPerson;
+          this.parsedJson.person = new Person(this.myPerson);
       }
     );
     this.editPerson = false;
   }
 
+  updateEmployment() {
+    this.personalInfo.updateEmployee(this.employee).subscribe (
+      data=>{
+          console.log('updated Employee!');
+          // Update perminate data, too
+          this.parsedJson.employee = new Employee(this.employee);
+      }
+    );
+    this.editEmployment = false;
+  }
+
   updateAddresses() {
     this.personalInfo.updateAddress(this.primary).subscribe (
       data=>{
-          console.log('update primary!');
+          console.log('updated primary!');
           // Update perminate data, too
-          this.parsedJson.primary = this.primary;
+          this.parsedJson.primary = new Address(this.primary);
       }
     );
     this.personalInfo.updateAddress(this.secondary).subscribe (
       data=>{
-          console.log('update secondary!');
+          console.log('updated secondary!');
           // Update perminate data, too
-          this.parsedJson.secondary = this.secondary;
+          this.parsedJson.secondary =  new Address(this.secondary);
       }
     );
     this.editAddress = false;
@@ -151,12 +98,15 @@ editContacts : boolean = false;
   updateContacts() {
     this.personalInfo.updateContact(this.contacts).subscribe (
       data=>{
-          console.log('updating contacts!');
+          console.log('updated contacts!');
+          // Update perminate data, too
+    let len = this.contacts.length;
+    for (let i = 0; i < len; i++) {
+      this.parsedJson.emergencies[i] = new Contact(this.contacts[i]);
+    }
       }
     );
-    console.log('updated contacts!');
-    // Update perminate data, too
-    this.parsedJson.contacts = this.contacts;
+    console.log('updating contacts!');    
     this.editContacts = false;
   }
   
@@ -167,15 +117,27 @@ editContacts : boolean = false;
     this.editPerson = false;
   }
 
+  resetEmployment() {
+    this.employee = new Employee(this.parsedJson.employee);
+    //console.log(this.parsedJson.person);
+    //this.myPerson.alternatePhone = "test";    
+    this.editEmployment = false;
+  }
+
   resetAddresses() {
     this.primary = new Address(this.parsedJson.primary);
     this.secondary = new Address(this.parsedJson.secondary);
-    console.log(this.parsedJson.primary);
+    console.log(this.parsedJson.secondary);
     this.editAddress = false;
   }
 
+  //TODO: not work properly
   resetContacts() {
-    //TODO
+    let len = this.contacts.length;
+    for (let i = 0; i < len; i++) {
+      this.contacts[i] = new Contact(this.parsedJson.emergencies[i]);
+      //console.log("Contact " + this.contacts[i].name);
+    }
     this.editContacts = false;
   }
 
@@ -197,7 +159,7 @@ editContacts : boolean = false;
   
 
 
-  // 上传文件
+  // Upload file
   selectedFiles: FileList;
   currentFileUpload: File;
 
